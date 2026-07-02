@@ -1,5 +1,7 @@
 # ── Build stage ──
-FROM rust:1.85-slim-bookworm AS builder
+# Note: rustc ≥ 1.89 required by redb 4.1.0 + darling 0.23.0.
+# Toolchain pin tracks Cargo.lock — bump when Cargo.toml dependencies move.
+FROM rust:1.89-slim-bookworm AS builder
 
 WORKDIR /build
 COPY Cargo.toml Cargo.lock ./
