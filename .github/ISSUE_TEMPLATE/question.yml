@@ -1,0 +1,24 @@
+name: Question / Discussion
+description: Ask how to use taodb, or start a discussion
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      content: |
+        For usage questions, please first check:
+        - [docs/](docs/) (English & 中文)
+        - [USAGE.md](USAGE.md)
+        - existing GitHub Discussions
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      placeholder: "How do I ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context (project type, current setup, what you've tried)

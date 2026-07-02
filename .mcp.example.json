@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "taodb": {
+      "command": "./target/release/taodb",
+      "args": ["mcp", "--data", "./taodb-data"],
+      "env": {
+        "TAODB_USER": "default",
+        "TAODB_PROJECT": "default"
+      }
+    }
+  }
+}

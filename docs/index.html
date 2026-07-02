@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaoDB — Your Agent's Memory</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #fafaf8; --fg: #1a1a18; --muted: #6b6b66; --accent: #2563eb; --border: #e5e3df; --code-bg: #f3f2ef; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; line-height: 1.6; color: var(--fg); background: var(--bg); -webkit-font-smoothing: antialiased; }
+  header { padding: 80px 24px 64px; max-width: 720px; margin: 0 auto; }
+  header h1 { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+  header .tagline { font-size: 1.125rem; color: var(--muted); margin-bottom: 32px; max-width: 540px; }
+  .install-bar { background: #1a1a18; color: #e5e3df; padding: 14px 20px; border-radius: 6px; font-family: "SF Mono", "Fira Code", monospace; font-size: 0.875rem; overflow-x: auto; white-space: nowrap; margin-bottom: 12px; }
+  .install-bar span { color: #6b6b66; }
+  .install-note { font-size: 0.875rem; color: var(--muted); }
+  nav { display: flex; gap: 24px; margin-top: 32px; font-size: 0.9375rem; }
+  nav a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  nav a:hover { text-decoration: underline; }
+  nav .separator { color: var(--border); }
+  section { padding: 64px 24px; max-width: 720px; margin: 0 auto; border-top: 1px solid var(--border); }
+  section h2 { font-size: 1.5rem; font-weight: 650; letter-spacing: -0.01em; margin-bottom: 20px; }
+  section p, section li { color: var(--muted); }
+  section p { margin-bottom: 16px; }
+  section p strong { color: var(--fg); }
+  ul { padding-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 8px; }
+  .comparison { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.875rem; }
+  .comparison th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); color: var(--fg); }
+  .comparison td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--muted); }
+  .comparison tr td:first-child { font-weight: 500; color: var(--fg); }
+  .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+  .ba-box { background: var(--code-bg); border: 1px solid var(--border); border-radius: 4px; padding: 20px; font-size: 0.8125rem; }
+  .ba-box h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; color: var(--muted); font-weight: 600; }
+  .ba-box code { font-family: "SF Mono", "Fira Code", monospace; font-size: 0.8125rem; display: block; margin-bottom: 6px; color: var(--fg); }
+  .ba-box code.muted { color: var(--muted); }
+  .personas { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+  .persona { background: var(--code-bg); border: 1px solid var(--border); border-radius: 4px; padding: 16px; }
+  .persona h4 { font-size: 0.9375rem; margin-bottom: 8px; color: var(--fg); }
+  .persona p { font-size: 0.8125rem; color: var(--muted); margin-bottom: 0; }
+  footer { padding: 48px 24px; max-width: 720px; margin: 0 auto; border-top: 1px solid var(--border); font-size: 0.8125rem; color: var(--muted); }
+  @media (max-width: 600px) {
+    header { padding: 48px 20px 40px; }
+    header h1 { font-size: 1.75rem; }
+    .before-after, .personas { grid-template-columns: 1fr; }
+    .install-bar { font-size: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>TaoDB</h1>
+  <p class="tagline">
+    给 LLM agent 持久的记忆。一个二进制文件，零配置。
+  </p>
+  <div class="install-bar"><span>$</span> curl -fsSL https://raw.githubusercontent.com/taodbhip/taodb/main/install.sh | bash</div>
+  <p class="install-note">然后 <code>cd your-project &amp;&amp; taodb init</code>，重启 agent。完毕。</p>
+  <nav>
+    <a href="en/">English Docs</a>
+    <span class="separator">|</span>
+    <a href="zh/">中文文档</a>
+    <span class="separator">|</span>
+    <a href="https://github.com/taodbhip/taodb">GitHub</a>
+  </nav>
+</header>
+
+<section id="who">
+  <h2>谁在用 TaoDB</h2>
+  <div class="personas">
+    <div class="persona">
+      <h4>💻 Coding</h4>
+      <p>Agent 记住架构决策、bug 模式、模块历史。不用每次重新解释代码库。</p>
+    </div>
+    <div class="persona">
+      <h4>📝 写作与文档</h4>
+      <p>Agent 记住研究线索、草稿演变、章回大纲。长文创作的连贯性不丢失。</p>
+    </div>
+    <div class="persona">
+      <h4>🎨 设计</h4>
+      <p>Agent 记住设计系统规则、组件迭代、客户反馈。每次改版都有上下文。</p>
+    </div>
+    <div class="persona">
+      <h4>🎬 视频与广告</h4>
+      <p>Agent 记住项目 brief、剪辑决策、平台规格、客户修改意见。项目间生产线不断。</p>
+    </div>
+  </div>
+  <p>只要你在多个会话里用 LLM agent 做创作或技术工作，TaoDB 就是给你的。</p>
+</section>
+
+<section id="problem">
+  <h2>LLM agent 是失忆的</h2>
+  <p>每次会话从零开始。Claude Code 不记得上周修了什么 bug。Cursor Agent 不知道哪个架构决策导致了今天的代码结构。Windsurf 想不起三个会话前刚踩过的坑。</p>
+  <p><strong>这不只是程序员的痛。</strong>写小说的人每次都要重新告诉 agent 主角叫什么、第几回发生了什么。设计师每次都要重新描述设计系统。做视频的人每次都要重新交代客户 brief。</p>
+  <p><strong>向量数据库解决不了这个问题。</strong>它们给你"语义相似"的文本——但知道一段代码"关于认证"和知道"我们在 sprint 3 修了 token rotation 的竞态条件，这个修复引入了回归"是两回事。知道一段文本"关于主角"和知道"第 152 回主角发现鼓皮共鸣与矿脉有关"是两回事。</p>
+  <p>LLM 需要的是<strong>记忆</strong>。不是语义搜索。是时空记忆。</p>
+</section>
+
+<section id="before-after">
+  <h2>使用 TaoDB 前后的区别</h2>
+  <div class="before-after">
+    <div class="ba-box">
+      <h4>没有 TaoDB</h4>
+      <code>Agent: "我来看看 auth 模块..."</code>
+      <code class="muted">Agent 从头读 auth.rs，不知道历史</code>
+      <code>Agent: "这里有个竞态条件，我修一下"</code>
+      <code class="muted">Agent 不知道这个问题上周已修过</code>
+      <code>Agent: "用 mutex 锁一下"</code>
+      <code class="muted">Agent 不知道上次用 mutex 引入了死锁</code>
+    </div>
+    <div class="ba-box">
+      <h4>有 TaoDB</h4>
+      <code>Agent: "taodb_recent(1)"</code>
+      <code class="muted">→ 上次：用 atomic swap 修复了 token rotation 竞态</code>
+      <code>Agent: "taodb_recall_constraints"</code>
+      <code class="muted">→ JWT 架构、AppError 约定、bcrypt 迁移决策</code>
+      <code>Agent: "看到了。已经有了上下文——继续。"</code>
+    </div>
+  </div>
+</section>
+
+<section id="what-it-is">
+  <h2>TaoDB 的定位</h2>
+  <table class="comparison">
+    <tr>
+      <th></th><th>TaoDB</th><th>向量数据库</th><th>Mem0 / Zep</th>
+    </tr>
+    <tr>
+      <td>索引</td><td>时间 + 空间 + 感官</td><td>向量相似度</td><td>语义 + 对话</td>
+    </tr>
+    <tr>
+      <td>取回方式</td><td>"auth 模块上周发生了什么"<br>"所有带'涩'感的记忆"</td><td>"和这段文本相似的内容"</td><td>"跟这条消息语义相关"</td>
+    </tr>
+    <tr>
+      <td>记忆衰减</td><td>有 — 三层能量地板模型</td><td>无</td><td>无</td>
+    </tr>
+    <tr>
+      <td>依赖</td><td>零（嵌入式 redb）</td><td>云端 / 重</td><td>PostgreSQL / 云端</td>
+    </tr>
+    <tr>
+      <td>使用</td><td><code>taodb init</code> → 重启 agent。完毕。</td><td>注册 → API key → 配 embedding</td><td>注册 → 配数据库</td>
+    </tr>
+    <tr>
+      <td>适用人群</td><td>Coding · 写作 · 设计 · 视频</td><td>仅技术用户</td><td>对话类 agent</td>
+    </tr>
+  </table>
+</section>
+
+<section id="how-it-works">
+  <h2>工作原理</h2>
+  <p><strong>不可见的本地 MCP 服务。</strong>无需端口、无需 token、无需配置。</p>
+  <p><code>taodb init</code> → agent 通过 <code>.mcp.json</code> 发现 taoDB → agent 用 MCP stdio（标准输入输出）和 taoDB 通信 → taoDB 读写本地 <code>taodb-memory/</code> 目录 → agent 有记忆了。<strong>整个过程对用户完全不可见。</strong></p>
+  <p><strong>三层记忆架构：</strong></p>
+  <ul>
+    <li><strong>约束层</strong> — 规则、架构、设计系统、客户 brief。永不衰减。每次会话自动加载。</li>
+    <li><strong>叙事层</strong> — 事件、变更、迭代、草稿。随时间衰减，近期优先。</li>
+    <li><strong>感官层</strong> — 纹理、模式、情绪。跨容器、跨时间、跨项目触发联想。</li>
+  </ul>
+  <p>重要内容设 <code>energy_floor=0.7</code> 永不消退。每次召回 +0.05 能量，使用强化记忆。</p>
+</section>
+
+<section id="get-started">
+  <h2>开始使用</h2>
+  <div class="install-bar"><span>$</span> curl -fsSL https://raw.githubusercontent.com/taodbhip/taodb/main/install.sh | bash</div>
+  <p style="margin-top: 12px;">然后 <code>cd your-project &amp;&amp; taodb init</code>，重启 agent。<strong>完毕。不需要启动任何服务器。</strong></p>
+  <p style="margin-top: 8px; color: var(--muted);">agent 通过本地 MCP stdio 自动连接 taoDB。零网络、零 token、零配置。</p>
+  <p style="margin-top: 8px;">首次会话 agent 自动检测空数据库 → 提示导入项目内容 → 之后每次会话自动召回上下文。</p>
+  <p style="margin-top: 16px;">
+    <a href="en/getting-started">English Guide</a> &nbsp;|&nbsp;
+    <a href="zh/getting-started">中文指南</a>
+  </p>
+</section>
+
+<footer>
+  TaoDB is <a href="https://github.com/taodbhip/taodb/blob/main/LICENSE">MIT licensed</a>.
+  Built with Rust, redb, axum, rmcp. Zero external API dependencies.
+</footer>
+
+</body>
+</html>

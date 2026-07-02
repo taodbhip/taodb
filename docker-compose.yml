@@ -1,0 +1,27 @@
+# TaoDB self-host deployment
+#
+# Quick start:
+#   docker-compose up -d
+#
+# Then create a user and start using:
+#   curl -X POST http://localhost:8765/v1/users \
+#     -H "x-api-token: tk_admin" \
+#     -d '{"user_id":"me","email":"me@example.com"}'
+
+services:
+  taodb:
+    image: ghcr.io/taodbhip/taodb:latest
+    command: serve --addr 0.0.0.0:8765 --data /data --admin-token ${TAODB_ADMIN_TOKEN:-tk_admin}
+    ports:
+      - "8765:8765"
+    volumes:
+      - taodb-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8765/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  taodb-data:

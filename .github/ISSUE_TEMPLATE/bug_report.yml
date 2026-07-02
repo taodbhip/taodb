@@ -1,0 +1,80 @@
+name: Bug Report
+description: Report broken behavior in taodb
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      content: |
+        Thanks for taking time to file a bug. Please fill out the template below.
+
+  - type: input
+    id: version
+    attributes:
+      label: taodb version (`taodb --version` or Cargo.toml)
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: rust_version
+    attributes:
+      label: Rust version (`rustc --version`)
+      placeholder: "rustc 1.96.0 ..."
+    validations:
+      required: false
+
+  - type: input
+    id: os
+    attributes:
+      label: OS & arch
+      placeholder: "macOS 15.5 aarch64 / Ubuntu 24.04 x86_64"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: protocol
+    attributes:
+      label: How are you using taodb?
+      options:
+        - MCP server (stdio)
+        - HTTP server (`taodb serve`)
+        - CLI only
+        - Creator IDE (web UI)
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: What happened?
+      placeholder: |
+        Tell us what you observed. Paste the command, error message, or HTTP response.
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Run `taodb serve --data ./test-data`
+        2. curl -X POST http://127.0.0.1:8765/v1/users ...
+        3. ...
+      render: shell
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs (redact anything sensitive)
+      render: text
+
+  - type: textarea
+    id: extras
+    attributes:
+      label: Anything else?

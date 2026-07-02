@@ -1,0 +1,14 @@
+/target
+.DS_Store
+.env
+*.redb
+config.json
+taodb-data/
+taodb-memory/
+__pycache__/
+.mcp.json
+target.taodb
+*.swp
+*~
+.vscode/
+.idea/

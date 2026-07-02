@@ -1,0 +1,38 @@
+name: Feature Request
+description: Suggest an improvement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      content: |
+        Help us understand what you'd like taodb to do. Frame the request in terms of
+        **what the agent gets** (memory behavior) and **what the user does** (CLI / HTTP / MCP).
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      placeholder: |
+        Describe the workflow gap. Example: "When writing Chapter 50, my agent
+        doesn't recall the foreshadowing planted in Chapter 12 because the container
+        tags don't match across chapters."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use case (vibe coding / novel writing / design / video / KB / agent dev)
