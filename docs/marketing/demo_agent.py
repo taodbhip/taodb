@@ -129,12 +129,17 @@ def memorize(mcp, text, containers, energy):
     print(f"   containers:  {containers}")
     print(f"   energy:      {energy}")
     print()
+    # Pass wall-clock time_ns so the demo never trips the
+    # "time_ns 未设置" warning. A real agent that finished a
+    # debugging session is storing something that *just happened* —
+    # wall clock is the right value.
     r = mcp.call_tool(
         "taodb_memorize",
         {
             "text": text,
             "containers": containers,
             "energy_floor": energy,
+            "time_ns": time.time_ns(),
         },
     )
     payload = json.loads(r["result"]["content"][0]["text"])
@@ -194,6 +199,10 @@ def main():
         sys.exit(1)
 
     cmd = sys.argv[1]
+    # `ask` is a demo-friendly alias for `recall` — it reads more
+    # naturally in the recording than the implementation name.
+    if cmd == "ask":
+        cmd = "recall"
     if cmd not in ("memorize", "recall"):
         print(f"unknown command: {cmd}", file=sys.stderr)
         sys.exit(1)

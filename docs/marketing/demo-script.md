@@ -16,7 +16,7 @@
 | 0:03 – 0:08 | Terminal: `taodb init --user demo --project auth-service` | "One command. taodb initializes inside your project, zero config." |
 | 0:08 – 0:13 | `python3 demo_agent.py memorize "..." --containers ... --energy 0.3` | "Session 1: the agent stores the auth-module decision after debugging a deadlock." |
 | 0:13 – 0:15 | "··· two weeks later ···" caption | "Two weeks pass." |
-| 0:15 – 0:18 | `python3 demo_agent.py ask "what did we decide about auth?"` | "Session 2: new agent, same project, asks: what did we decide about auth?" |
+| 0:15 – 0:18 | `python3 demo_agent.py ask "what did we decide about auth last week?" --containers feature:auth --days 14` | "Session 2: new agent, same project, asks: what did we decide about auth?" |
 | 0:18 – 0:24 | Output: the prior decision is the top hit, with `energy=0.35 (floor=0.30)` and `recall_paths` showing `天` (time) + `地` (container) hits | "The decision is the top hit. With the energy floor showing it's protected, and the recall paths showing which dimensions matched." |
 | 0:24 – 0:28 | Side-by-side: vector DB result vs taodb result | "Same query against a vector DB: 0/5. Top hits are RFCs, tutorials, Stack Overflow." |
 | 0:28 – 0:30 | `github.com/taodbhip/taodb` | "taodb. Open source. MIT. Single binary, zero config." |
@@ -48,6 +48,10 @@ Run this once to put the project in the right state. Don't record any of it.
 rm -rf ~/demo/auth-service
 mkdir -p ~/demo/auth-service/src
 cd ~/demo/auth-service
+
+# (taodb stores its redb DB under `taodb-data/`, not `taodb-memory/`
+#  — `taodb-memory/` is created empty by `taodb init` for symmetry
+#  with the agent context layer but contains no actual data files.)
 
 # 2. Add a few files so the project looks real
 cat > Cargo.toml <<'EOF'
@@ -137,7 +141,7 @@ Sleep 1000ms
 Enter
 Sleep 500ms
 
-Type `python3 demo_agent.py ask "what did we decide about auth last week?"`
+Type `python3 demo_agent.py ask "what did we decide about auth last week?" --containers feature:auth --days 14`
 Sleep 500ms
 Enter
 Sleep 5000ms
@@ -269,7 +273,7 @@ sleep 2
 # === Session 2 ===
 echo "# Session 2 — new agent, same project"
 sleep 1
-python3 demo_agent.py ask "what did we decide about auth last week?"
+python3 demo_agent.py ask "what did we decide about auth last week?" --containers feature:auth --days 14
 sleep 4
 
 echo "# github.com/taodbhip/taodb"
