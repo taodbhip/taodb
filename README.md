@@ -75,6 +75,20 @@ Works with Claude Code, Cursor, Windsurf, Hermes, OpenCode — any MCP agent.
 
 ---
 
+## Demo
+
+![taodb — 30-second demo](docs/marketing/demo.gif)
+
+30 seconds, two sessions apart. The agent stores the decision in Session 1, asks about it in Session 2, and taodb surfaces the prior decision with `recall_paths` showing which dimensions matched — `天` (time range) and `地` (container overlap).
+
+Same query against a vector DB returns online tutorials and RFC text. taodb returns the actual decision:
+
+![vector DB vs taodb](docs/marketing/side-by-side.png)
+
+[📖 Full demo storyboard & recording notes](docs/marketing/demo-script.md) · [Show HN kit](docs/marketing/show-hn.md)
+
+---
+
 ## How It Works
 
 ```

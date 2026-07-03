@@ -284,6 +284,39 @@ sleep 2
 
 ---
 
+## Fallback: PIL render (no vhs / no asciinema / no network)
+
+When both `vhs` and `asciinema` are unavailable (e.g. brew is blocked,
+or the network can't reach GitHub releases), use `render-demo.py` —
+a Python+Pillow renderer that produces the same 30s demo as `demo.gif`
+plus `demo.mp4`, with no external service and no network calls.
+
+```bash
+cd docs/marketing
+python3 render-demo.py
+# → demo.gif  (~3 MB, the one in this directory)
+# → demo.mp4  (~300 KB, for X / Discord video embeds)
+# → side-by-side.png  (the vector-DB vs taodb card)
+```
+
+`render-demo.py` uses Pillow to draw 7 storyboard beats (title card,
+init, Session 1 memorize, two-weeks caption, Session 2 ask,
+side-by-side, github URL) at 1280×720 with Tokyo Night palette and
+Hiragino Sans GB so the rendered output covers both ASCII terminal
+text and the CJK characters that `taodb init` and the `recall_paths`
+block emit. Frames are PNG sequences encoded to mp4 with `libx264`,
+then to gif via the standard `palettegen`/`paletteuse` trick.
+
+The storyboard is hard-coded inside the script — to change timing,
+edit `BEATS = [(name, duration_ms, render_fn), …]`. To change a line
+of terminal output, edit the corresponding `render_*` function. The
+matches up exactly with the Storyboard table at the top of this file.
+
+Set `KEEP_FRAMES=1` to keep the intermediate PNG sequence under
+`render/frames/seq/` for debugging.
+
+---
+
 ## Fallback: Manual Screen Recording (zero tooling)
 
 ```bash
