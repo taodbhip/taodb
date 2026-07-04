@@ -36,7 +36,7 @@ taodb stores raw time-stamped events with energy decay (30-day narrative half-
 life, `energy_floor` for permanent rules) and a container index (the project's
 actual modules / threads / chapters). Recall returns a time-bounded,
 container-filtered slice of raw memories; the LLM does the semantic work.
-~1,200 lines of Rust, single 1.7 MB binary, zero external dependencies,
+~2,000 lines of Rust, single 1.7 MB compressed binary (3.8 MB unpacked), zero runtime services,
 MCP stdio transport.
 
 Install:  curl -fsSL https://raw.githubusercontent.com/taodbhip/taodb/main/install.sh | bash
@@ -90,7 +90,7 @@ and paste them, not paraphrased — paste the canonical version.
 > Memories live in a redb file inside your project (`./taodb-memory/`). Same
 > gitignore handling as `.env`. They never leave your machine. MCP transport
 > is stdio — no network, no telemetry. The README and source are auditable in
-> 1,200 lines of Rust, no vendored dependencies beyond what's in Cargo.toml
+> 2,000 lines of Rust, no vendored dependencies beyond what's in Cargo.toml
 > (redb, axum, rmcp, bincode, crc32, ulid — all auditable).
 >
 > install.sh makes exactly one outbound HTTP call: to api.github.com to fetch
@@ -99,7 +99,7 @@ and paste them, not paraphrased — paste the canonical version.
 
 ### Q5: What's the install footprint?
 
-> One 1.7 MB binary. Zero runtime dependencies. Optional ghcr.io Docker
+> One 1.7 MB compressed binary (3.8 MB unpacked, single Rust binary). Zero runtime services. Optional ghcr.io Docker
 > image (`docker pull ghcr.io/taodbhip/taodb:v1.0.0`). No daemon, no database
 > server, no Python virtualenv. Verified clean on macOS (arm64 + x86_64) and
 > Linux x86_64. Release artifacts: https://github.com/taodbhip/taodb/releases/tag/v1.0.0
@@ -174,7 +174,7 @@ giving a **specific, falsifiable** answer. Memorize these:
 1. **"Why not vector DB?"** → Recall mismatch. Worked example in `docs/why-not-vector-db.md`.
 2. **"Why not Postgres + tsvector?"** → tsvector is keyword, not temporal-spatial; no container model; no energy decay.
 3. **"Why not MemGPT?"** → Session-scale, summary-based, LLM in loop. Project-scale, raw events, LLM out of loop.
-4. **"How big is the project?"** → ~1,200 LOC Rust, 1.7 MB binary, 88 tests, single binary release.
-5. **"What's the differentiator?"** → Time + container + energy as the index. No LLM in recall. Zero external dependencies.
+4. **"How big is the project?"** → ~2,000 LOC Rust, 1.7 MB compressed binary, 88 tests, single-binary release.
+5. **"What's the differentiator?"** → Time + container + energy as the index. No LLM in recall. Zero runtime services.
 6. **"Who's the user?"** → Engineers with multi-session agent workflows where continuity matters (vibe coders, long-running creative projects, technical writing).
 7. **"Why open source?"** → Agent memory is too load-bearing to be a SaaS. It has to be inspectable.
