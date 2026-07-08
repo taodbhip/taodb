@@ -5,22 +5,22 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 
-**One binary. Zero config. Persistent memory for your agent.**
+**Your agent forgets everything between sessions.**
 
-taodb is built for **AI Creators** — anyone who uses LLM agents as a creative partner: vibe coders, AI writers, designers working with agentic tools, video producers, and advertising creators.
+You finish Friday's coding session — auth flow finally works. Monday morning you say "continue the auth work." Your agent re-reads the codebase from scratch... and suggests the mutex. The one you already tried. The one that deadlocked. The one you fixed with atomic swap.
 
-Your agent already sees, writes, designs, and edits. But it forgets everything between sessions. taodb gives it a memory. What happened, when, and which part of your project it belongs to. Every session picks up exactly where the last one left off.
+taodb gives your agent a memory: what happened, when, and which part of your project it belongs to. Every session picks up exactly where the last one left off.
 
-## AI Creators Use taodb For...
+## What You Build, What Your Agent Remembers
 
-| You create... | Your agent remembers... |
-|---------------|------------------------|
-| **Code** (Vibe Coding) | Architecture decisions, bug patterns, module history — your codebase has continuity |
-| **Writing & Docs** | Research threads, draft evolution, chapter outlines — long-form work stays coherent |
-| **Design** (Agentic Design) | Design system rules, component iterations, client feedback — every revision has context |
+| You build... | Your agent picks up... |
+|--------------|------------------------|
+| **Code** (vibe coding) | Architecture decisions, bug patterns, module history — your codebase has continuity |
+| **Writing & docs** | Research threads, draft evolution, chapter outlines — long-form work stays coherent |
+| **Design** (agentic design) | Design system rules, component iterations, client feedback — every revision has context |
 | **Video & ads** | Project briefs, edit decisions, platform specs, client revisions — pipeline across shoots |
 
-One tool. Any creative workflow. All you need is an LLM agent and something to make.
+One tool. Any creative workflow. Any LLM agent. Just bring something to make.
 
 ---
 
